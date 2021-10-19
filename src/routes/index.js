@@ -1,12 +1,11 @@
 const express = require('express');
+const jwtMiddleware = require('../middleware/authJwt');
+const {commonResponse} = require("../controllers/basic.controller");
 const router = express.Router();
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-    res.send({
-        "status": 200,
-        "response": "firme mi causa"
-    })
+router.get('/', jwtMiddleware.verifyToken, function (req, res) {
+    return commonResponse(req, res, 200, 'Rest Api works');
 });
 
 module.exports = router;
