@@ -8,6 +8,7 @@ const dbConfig = require("./config/db.config");
 // require routes
 const indexRouter = require('./routes');
 const authRouter = require('./routes/auth');
+const avatarRouter = require('./routes/avatar');
 
 const app = express();
 
@@ -18,7 +19,7 @@ const corsOptions = {
 app.use(logger('dev'));
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 
 db.mongoose.connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
     useNewUrlParser: true,
@@ -27,5 +28,6 @@ db.mongoose.connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/avatar', avatarRouter);
 
 module.exports = app;

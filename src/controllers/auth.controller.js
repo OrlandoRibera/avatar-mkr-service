@@ -71,7 +71,7 @@ exports.signIn = (req, res) => {
       return commonResponse(req, res, 404, "Usuario y/o contraseña inválidos");
     }
     const token = jwt.sign({ userId: user.id }, config.secret, {
-      expiresIn: 180, // 3 minutes
+      expiresIn: 500, // 5 minutes
     });
 
     return commonResponse(req, res, 200, "Inicio de sesión exitoso", {
